@@ -299,6 +299,9 @@ public class Node<T extends Comparable<T>> implements Comparable<Node<T>> {
     public String getCircuit(){
         String s = _data + "> ";
         Set<Node<T>> set = new HashSet<Node<T>>();
+        if(_edges.size() == 0){
+            s = _data + "";
+        }
         Node<T> candidate = null;
         set.addAll(_edges.values());
         for(Node<T> n : set){
