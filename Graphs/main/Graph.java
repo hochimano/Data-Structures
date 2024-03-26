@@ -480,12 +480,18 @@ public class Graph<T extends Comparable<T>> {
         if(!isEulerianCircuit()){
             return null;
         }
-        String s = "";
         Map<Integer, Node<T>> copy = new HashMap<Integer, Node<T>>();
         copy.putAll(_nodes);
-        Iterator<Node<T>> i = copy.values().iterator();
-        Node<T> start = i.next();
-        return start.getCircuit();
+        Node<T> candidate = null;
+        for(Node<T> n : copy.values()){
+            if(candidate == null){
+                candidate = n;
+            }
+            if(n.getEdges().size() > candidate.getEdges().size()){
+                candidate = n;
+            }
+        }
+        return candidate.getCircuit();
     }
 }
 

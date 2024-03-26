@@ -102,6 +102,8 @@ public class Graphs3_tests extends TestsCore {
        System.out.println(g.findCircuit());
        g = readGraph("/Graphs/data/eulerian5.txt");
        System.out.println(g.findCircuit());
+       g = readGraph("/Graphs/data/basicEulerian.txt");
+       System.out.println(g.findCircuit());
 
     }
 }

@@ -311,6 +311,10 @@ public class Node<T extends Comparable<T>> implements Comparable<Node<T>> {
             if(n.getEdges().size() > candidate.getEdges().size()){
                 candidate = n;
             }
+            if(n.getEdges().containsValue(this)){
+                candidate = n;
+                break;
+            }
         }
             if(candidate != null){
             _edges.remove(candidate._data.hashCode());
