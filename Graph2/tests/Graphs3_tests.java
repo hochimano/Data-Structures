@@ -1,7 +1,6 @@
-package Graphs.tests;
+package Graph2.tests;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.io.FileNotFoundException;
@@ -9,7 +8,7 @@ import java.util.TreeMap;
 
 import org.junit.Test;
 
-import Graphs.main.Graph;
+import Graph2.main.Graph;
 
 public class Graphs3_tests extends TestsCore {
 
@@ -47,7 +46,6 @@ public class Graphs3_tests extends TestsCore {
         g = readGraph("/Graphs/data/medium2.txt");
         assertEquals(3, g.countPartitions());
     }
-
     
     //____ DIJKSTRA DISTANCES ____
     /**In a Graph, the Dijkstra distances algorithm is finding the <b>shortest</b> distances
@@ -90,26 +88,7 @@ public class Graphs3_tests extends TestsCore {
     }
     
     @Test
-    public void test_eulerianCircuit() throws FileNotFoundException{
-       Graph<String> g = readGraph("/Graphs/data/eulerian1.txt");
-       assertTrue(g.isEulerianCircuit());
-       System.out.println(g.findCircuit());
-       g = readGraph("/Graphs/data/eulerian2.txt");
-       assertTrue(!g.isEulerianCircuit());
-       g = readGraph("/Graphs/data/eulerian3.txt");
-       assertTrue(!g.isEulerianCircuit());
-       g = readGraph("/Graphs/data/eulerian4.txt");
-       System.out.println(g.findCircuit());
-       g = readGraph("/Graphs/data/eulerian5.txt");
-       System.out.println(g.findCircuit());
-       g = readGraph("/Graphs/data/basicEulerian.txt");
-       System.out.println(g.findCircuit());
-       g = readGraph("/Graphs/data/basicEulerian2.txt");
-       System.out.println(g.findCircuit());
-       g = readGraph("/Graphs/data/basicEulerian3.txt");
-       System.out.println(g.findCircuit());
-       g = readGraph("/Graphs/data/eulerian6.txt");
-       System.out.println(g.findCircuit());
-
+    public void test_eulerianCircuit() {
+        fail("Not yet implemented");
     }
 }

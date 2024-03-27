@@ -477,6 +477,7 @@ public class Graph<T extends Comparable<T>> {
     }
 
     public String findCircuit(){
+        int count = 0;
         if(!isEulerianCircuit()){
             return null;
         }
@@ -491,7 +492,7 @@ public class Graph<T extends Comparable<T>> {
                 candidate = n;
             }
         }
-        return candidate.getCircuit();
+        return candidate.getCircuit(count);
 
 
     }

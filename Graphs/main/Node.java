@@ -296,7 +296,8 @@ public class Node<T extends Comparable<T>> implements Comparable<Node<T>> {
         return s;
     }
 
-    public String getCircuit(){
+    public String getCircuit(int count){
+        count++;
         String s = _data + "> ";
         Set<Node<T>> set = new HashSet<Node<T>>();
         if(_edges.size() == 0){
@@ -305,12 +306,8 @@ public class Node<T extends Comparable<T>> implements Comparable<Node<T>> {
         Node<T> candidate = null;
         set.addAll(_edges.values());
         for(Node<T> n : set){
-            if(candidate == null){
-                candidate = n;
-            }
-            if(n.circuithelper2() < candidate.circuithelper2()){
-                candidate = n;
-            }
+            count++;
+            candidate = candidate == null || n.circuithelper2() < candidate.circuithelper2() ? n : candidate;
             if(n.getEdges().containsValue(this)){
                 candidate = n;
                 break;
@@ -318,8 +315,8 @@ public class Node<T extends Comparable<T>> implements Comparable<Node<T>> {
         }
             if(candidate != null){
             _edges.remove(candidate._data.hashCode());
-            s += candidate.getCircuit();
-            }
+            s += candidate.getCircuit(count);
+            } else System.out.println(count);
             
         return s;
     }
