@@ -308,7 +308,7 @@ public class Node<T extends Comparable<T>> implements Comparable<Node<T>> {
             if(candidate == null){
                 candidate = n;
             }
-            if(n.getEdges().size() > candidate.getEdges().size()){
+            if(n.circuithelper2() < candidate.circuithelper2()){
                 candidate = n;
             }
             if(n.getEdges().containsValue(this)){
@@ -322,6 +322,10 @@ public class Node<T extends Comparable<T>> implements Comparable<Node<T>> {
             }
             
         return s;
+    }
+
+    public int circuithelper2(){
+        return _edges.size() + _edges2.size();
     }
 
 }

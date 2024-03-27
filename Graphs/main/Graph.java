@@ -492,6 +492,8 @@ public class Graph<T extends Comparable<T>> {
             }
         }
         return candidate.getCircuit();
+
+
     }
 }
 
