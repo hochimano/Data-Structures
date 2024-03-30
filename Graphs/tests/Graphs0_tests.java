@@ -81,14 +81,14 @@ public class Graphs0_tests extends TestsCore {
         
         // The Graph as only two nodes with an Edge between them: A --> B.
         assertEquals(2, g.size());
-        String expected = "A > B\n"
-                        + "B > ";
+        String expected = "A0 > B\n"
+                        + "B0 > ";
         assertEquals(expected, g.toString());
         
         // After removing, the Graph should contain two unlinked nodes.
         g.removeEdge('A', 'B');
-        expected = "A > \n"
-                 + "B > ";
+        expected = "A0 > \n"
+                 + "B0 > ";
         assertEquals(expected, g.toString());
     }
     

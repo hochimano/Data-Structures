@@ -49,6 +49,8 @@ public class Node<T extends Comparable<T>> implements Comparable<Node<T>> {
     private int _state;
 
     private Map<Integer, Node<T>> _edges2;
+
+    private String printRoutine;
     
     /**
      * Constructs a new Node containing the given <i>data</i> object.
@@ -66,6 +68,7 @@ public class Node<T extends Comparable<T>> implements Comparable<Node<T>> {
         _edges = new HashMap<Integer, Node<T>>();
         _state = 0;
         _edges2 = new HashMap<Integer, Node<T>>();
+        printRoutine = _data + "> ";
     }
     
     /**
@@ -296,18 +299,23 @@ public class Node<T extends Comparable<T>> implements Comparable<Node<T>> {
         return s;
     }
 
-    public String getCircuit(int count){
+    public String getCircuit(int count, Node<T> from){
         count++;
         String s = _data + "> ";
-        Set<Node<T>> set = new HashSet<Node<T>>();
         if(_edges.size() == 0){
-            s = _data + "";
+            return _data + "";
         }
         Node<T> candidate = null;
-        set.addAll(_edges.values());
-        for(Node<T> n : set){
+        for(Node<T> n : _edges.values()){
+            if(_edges.size() == 1){
+                candidate = n;
+                break;
+            }
             count++;
-            candidate = candidate == null || n.circuithelper2() < candidate.circuithelper2() ? n : candidate;
+            if(_edges2.containsValue(from)){
+                candidate = (candidate == null || n.circuithelper2() > candidate.circuithelper2()) && !n.equals(from) ? n : candidate;
+            } else candidate = (candidate == null || n.circuithelper2() < candidate.circuithelper2()) && !n.equals(from) ? n : candidate;
+
             if(n.getEdges().containsValue(this)){
                 candidate = n;
                 break;
@@ -315,8 +323,8 @@ public class Node<T extends Comparable<T>> implements Comparable<Node<T>> {
         }
             if(candidate != null){
             _edges.remove(candidate._data.hashCode());
-            s += candidate.getCircuit(count);
-            } else System.out.println(count);
+            s += candidate.getCircuit(count, this);
+            }
             
         return s;
     }
@@ -324,5 +332,30 @@ public class Node<T extends Comparable<T>> implements Comparable<Node<T>> {
     public int circuithelper2(){
         return _edges.size() + _edges2.size();
     }
+
+    public String getCircuit(){
+        if(_state != 0) return "";
+        _state = 1;
+        String s = printRoutine;
+        for(Node<T> n : _edges.values()){
+             s += n.getCircuit();
+        }
+        return s;
+    }
+
+    public void addPrint(String other){
+        printRoutine = other + printRoutine;
+    }
+
+    public String getPrint(){
+        return printRoutine;
+    }
+
+    public void clearEdges(){
+        _edges.clear();
+    }
+
+
+
 
 }

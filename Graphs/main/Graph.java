@@ -492,11 +492,49 @@ public class Graph<T extends Comparable<T>> {
                 candidate = n;
             }
         }
-        return candidate.getCircuit(count);
+        String str = candidate.getCircuit(count, null);
+        return str;
+    }
 
 
+    public int getEdges(Map<Integer, Node<T>> map){
+        int edges = 0;
+        for(Node<T> n : map.values()){
+            edges += n.circuithelper2();
+        }
+        return edges;
+    }
+
+    public String getCircuit(){
+        Set<Node<T>> set = new HashSet<Node<T>>();
+        Node<T> start = null;
+        for(Node<T> n : _nodes.values()){
+            if(start == null){
+                start = n;
+            }
+            if(n.circuithelper2() > 2){
+                set.add(n);
+            }
+        }
+        for(Node<T> n: set){
+            Iterator<Node<T>> i = n.getOutEdges().values().iterator();
+            Node<T> cur = i.next();
+            for(Node<T> node : n.getEdges().values()){
+                node.addPrint(n.getPrint());
+                removeEdge(cur.getData(), n.getData());
+                addEdge(cur.getData(), node.getData());
+                start = cur;
+                if(i.hasNext()){
+                    cur = i.next();
+                }
+            }
+            n.clearEdges(); 
+        }
+        return start.getCircuit() + start.getName();
     }
 }
+
+
 
 
 

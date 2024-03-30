@@ -7,9 +7,6 @@ public class Division {
     public Division(){
     }
     
-    public int divide(int a, int b){
-        
-        }
 
         
     }
